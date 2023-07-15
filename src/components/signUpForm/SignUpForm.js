@@ -11,6 +11,9 @@ import PasswordImage from "./images/placeholders/PasswordImage";
 import ConfirmPasswordImage from "./images/placeholders/ConfirmPasswordImage";
 import EmailImage from "./images/placeholders/EmailImage";
 import validationShema from "./validationShema";
+import removeStartingChars from "./functions/removeStartingChars";
+import isValueSelected from "./functions/isValueSelected";
+import compareNames from "./functions/compareNames";
 
 const SignUpForm = ({ countries }) => {
   const {
@@ -34,7 +37,6 @@ const SignUpForm = ({ countries }) => {
   const [countryCode, setCountryCode] = useState("");
   const [submitForm, setSubmitForm] = useState(false);
   const [countryFirst, setCountryFirst] = useState(false);
-  // const [formSubmited, setFormSubmited] = useState(false);
 
   const [firstTouchFields, setFirstTouchFileds] = useState({
     firstName: 0,
@@ -57,27 +59,26 @@ const SignUpForm = ({ countries }) => {
       [field]: prevFields[field] + 1,
     }));
   };
+  // const removeStartingChars = (phoneValue, countryCode) => {
+  //   if (phoneValue.startsWith(countryCode)) {
+  //     return phoneValue.substring(countryCode.length);
+  //   }
+  //   return "";
+  // };
 
-  const removeStartingChars = (phoneValue, countryCode) => {
-    if (phoneValue.startsWith(countryCode)) {
-      return phoneValue.substring(countryCode.length);
-    }
-    return "";
-  };
-
-  const isValueSelected = (value, array) => {
-    return array.some((item) => item.name === value);
-  };
-  const compareNames = (arr, inputName) => {
-    const lowerInputName = inputName.toLowerCase();
-    if (!inputName) {
-      return countries;
-    }
-    return arr.filter(({ name }) => {
-      const lowerItemName = name.toLowerCase();
-      return lowerItemName.includes(lowerInputName);
-    });
-  };
+  // const isValueSelected = (value, array) => {
+  //   return array.some((item) => item.name === value);
+  // };
+  // const compareNames = (arr, inputName) => {
+  //   const lowerInputName = inputName.toLowerCase();
+  //   if (!inputName) {
+  //     return countries;
+  //   }
+  //   return arr.filter(({ name }) => {
+  //     const lowerItemName = name.toLowerCase();
+  //     return lowerItemName.includes(lowerInputName);
+  //   });
+  // };
 
   return (
     <>
@@ -90,7 +91,11 @@ const SignUpForm = ({ countries }) => {
         validationSchema={validationShema}
       >
         {(props) => {
-          const countryArr = compareNames(countries, props.values.country);
+          const countryArr = compareNames(
+            countries,
+            props.values.country,
+            countries
+          );
           return (
             <Form className={formControl}>
               <div className={formControlInputWrapper}>
