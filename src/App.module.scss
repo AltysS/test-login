@@ -1,0 +1,73 @@
+.backgroundPicture {
+  position: relative;
+  background-image: url("./images/backgroundImage.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  padding: 100px 0 10px 0;
+}
+
+.container {
+  padding: 0 5px 0 5px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 23px;
+  .logo {
+    display: none;
+  }
+  > svg:first-of-type {
+    position: absolute;
+    left: 100%;
+    transform: translate(-100%, 5%);
+    top: 0px;
+  }
+  > svg:nth-of-type(2) {
+    position: absolute;
+    left: 0;
+    top: 11%;
+  }
+  > svg:nth-of-type(3) {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    transform: translate(-100%, -100%);
+  }
+  & > p:not(:last-of-type) {
+    margin-bottom: 30px;
+    & > span {
+      color: #6ceec7;
+    }
+  }
+}
+
+@media (min-width: 650px) {
+  .backgroundPicture {
+    padding: 0;
+  }
+  .container {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & > svg:first-of-type {
+      display: none;
+    }
+    & > svg:nth-of-type(2) {
+      display: none;
+    }
+    & > svg:nth-of-type(3) {
+      display: none;
+    }
+    .logo {
+      display: block;
+      margin-bottom: 30px;
+    }
+    & > p:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+}
